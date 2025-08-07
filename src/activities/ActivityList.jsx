@@ -13,16 +13,12 @@ export default function ActivityList() {
     <ul>
       {activities.map((act) => (
         <li key={act.id} style={{ marginBottom: "1rem" }}>
-          {/* Only the title is a link */}
-          <Link to={`/activities/${act.id}`}>
+          <Link to={`/activities/${act.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <h3>{act.name}</h3>
+            <p>{act.description}</p>
           </Link>
-          {/* But we still show the description right under it */}
-          <p>{act.description}</p>
         </li>
       ))}
     </ul>
   );
 }
-
-
