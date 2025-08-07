@@ -12,30 +12,31 @@ export default function SingleRoutinePage() {
     `/routines/${routineId}`,
     `routine-${routineId}`
   );
-  const { mutate: deleteRoutine, loading: deleting, error: deleteError } = useMutation(
-    "DELETE",
-    `/routines/${routineId}`,
-    ["routines"]
-  );
+  const {
+    mutate: deleteRoutine,
+    loading: deleting,
+    error: deleteError,
+  } = useMutation("DELETE", `/routines/${routineId}`, ["routines"]);
 
   if (loading) return <p>Loading routine…</p>;
-  if (error) return <output role="alert">{error}</output>;
+  if (error)   return <output role="alert">{error}</output>;
 
-  const routine = data.routine || data;
+  // `data` is the routine object with its `sets` array
+  const routine = data;
 
   return (
     <>
       <h1>{routine.name}</h1>
-      <p>by {routine.creatorName}</p>
+      <p><em>by {routine.creatorName}</em></p>
       <p>{routine.goal}</p>
 
-      {routine.activities?.length > 0 && (
+      {routine.sets?.length > 0 && (
         <>
           <h2>Sets</h2>
-          <ul>
-            {routine.activities.map((act) => (
-              <li key={act.routineActivityId}>
-                {act.name} × {act.count}
+          <ul className="card-list">
+            {routine.sets.map((set) => (
+              <li key={set.id}>
+                {set.name} × {set.count}
               </li>
             ))}
           </ul>

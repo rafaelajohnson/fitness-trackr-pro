@@ -6,19 +6,21 @@ export default function ActivityList() {
   const activities = Array.isArray(data) ? data : data?.activities || [];
 
   if (loading) return <p>Loading activities…</p>;
-  if (error) return <output role="alert">Sorry! {error}</output>;
+  if (error)   return <output role="alert">Sorry! {error}</output>;
 
   return (
-    <ul>
+    <ul className="card-list">
       {activities.map((act) => (
         <li key={act.id}>
-          <Link to={`/activities/${act.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block', padding: '0.75rem', border: '1px solid #ccc', borderRadius: '4px' }}>
-            <h3 style={{ margin: '0 0 0.5rem' }}>{act.name}</h3>
-            <p style={{ margin: 0 }}>{act.description}</p>
+          <Link to={`/activities/${act.id}`} className="card-link">
+            <h3>{act.name}</h3>
+            <p>{act.description}</p>
           </Link>
         </li>
       ))}
     </ul>
   );
 }
+
+
 

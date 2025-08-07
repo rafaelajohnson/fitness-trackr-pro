@@ -1,4 +1,3 @@
-// src/activities/SingleActivityPage.jsx
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import useQuery from "../api/useQuery";
@@ -9,25 +8,27 @@ export default function SingleActivityPage() {
   const navigate = useNavigate();
   const { token } = useAuth();
 
-  // Fetch just this one activity
   const { data, loading, error } = useQuery(
     `/activities/${activityId}`,
     `activity-${activityId}`
   );
-  const { mutate: deleteActivity, loading: deleting, error: deleteError } =
-    useMutation("DELETE", `/activities/${activityId}`, ["activities"]);
+  const {
+    mutate: deleteActivity,
+    loading: deleting,
+    error: deleteError,
+  } = useMutation("DELETE", `/activities/${activityId}`, ["activities"]);
 
   if (loading) return <p>Loading activity…</p>;
-  if (error) return <output role="alert">{error}</output>;
+  if (error)   return <output role="alert">{error}</output>;
 
-  const activity = data.activity || data;
+  // `data` is the activity object
+  const activity = data;
 
   return (
     <>
       <h1>{activity.name}</h1>
-      <p>by {activity.creatorName}</p>
+      <p><em>by {activity.creatorName}</em></p>
       <p>{activity.description}</p>
-
       {token && (
         <>
           <button
