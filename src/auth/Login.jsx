@@ -1,20 +1,21 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import { usePage } from "../layout/PageContext";
 
-/** A form that allows users to log into an existing account. */
 export default function Login() {
   const { login } = useAuth();
-  const { setPage } = usePage();
-
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const tryLogin = async (formData) => {
-    const username = formData.get("username");
-    const password = formData.get("password");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
     try {
-      await login({ username, password });
-      setPage("activities");
+      await login({
+        username: form.get("username"),
+        password: form.get("password"),
+      });
+      navigate("/activities");
     } catch (e) {
       setError(e.message);
     }
@@ -23,7 +24,7 @@ export default function Login() {
   return (
     <>
       <h1>Log in to your account</h1>
-      <form action={tryLogin}>
+      <form onSubmit={handleSubmit}>
         <label>
           Username
           <input type="text" name="username" required />
@@ -32,10 +33,11 @@ export default function Login() {
           Password
           <input type="password" name="password" required />
         </label>
-        <button>Login</button>
-        {error && <output>{error}</output>}
+        <button type="submit">Login</button>
+        {error && <output role="alert">{error}</output>}
       </form>
-      <a onClick={() => setPage("register")}>Need an account? Register here.</a>
+      <Link to="/register">Need an account? Register here.</Link>
     </>
   );
 }
+
