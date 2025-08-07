@@ -15,6 +15,7 @@ export default function Navbar() {
       <p>Fitness Trackr</p>
       <nav>
         <NavLink to="/activities">Activities</NavLink>
+        <NavLink to="/routines">Routines</NavLink>
         {token ? (
           <button onClick={handleLogout}>Log out</button>
         ) : (
@@ -27,3 +28,4 @@ export default function Navbar() {
     </header>
   );
 }
+

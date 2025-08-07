@@ -1,31 +1,47 @@
-* {
+{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-form,
-label,
-main {
-  display: grid;
-  gap: 0.5rem;
-}
-
-#root {
-  width: 45ch;
-  margin: 0 auto;
+body {
+  font-family: 'Segoe UI', sans-serif;
   padding: 1rem;
+  max-width: 45ch;
+  margin: auto;
 }
 
 header {
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem 0;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+header p {
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 header nav {
   display: flex;
-  gap: 1ch;
+  gap: 1rem;
+}
+
+header nav a {
+  color: teal;
+  text-decoration: none;
+}
+
+header nav a.active {
+  text-decoration: underline;
+}
+
+header nav button {
+  background: none;
+  border: none;
+  color: teal;
+  cursor: pointer;
 }
 
 a {
@@ -33,11 +49,19 @@ a {
 }
 
 a:hover {
-  cursor: pointer;
   text-decoration: underline;
 }
 
-ul,
-ol {
-  padding-left: 1rem;
+main {
+  display: grid;
+  gap: 1rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 1rem;
 }
