@@ -1,3 +1,4 @@
+// src/App.jsx
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Layout from "./layout/Layout";
@@ -13,22 +14,22 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {/* Redirect / → /activities */}
+        {/* Redirect root URL to /activities */}
         <Route index element={<Navigate to="/activities" replace />} />
 
-        {/* Activities */}
+        {/* Activities list & detail */}
         <Route path="activities" element={<ActivitiesPage />} />
         <Route path="activities/:activityId" element={<SingleActivityPage />} />
 
-        {/* Routines */}
+        {/* Routines list & detail */}
         <Route path="routines" element={<RoutinesPage />} />
         <Route path="routines/:routineId" element={<SingleRoutinePage />} />
 
-        {/* Auth */}
+        {/* Authentication */}
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
 
-        {/* 404 */}
+        {/* 404 catch-all */}
         <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>

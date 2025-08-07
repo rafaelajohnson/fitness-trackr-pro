@@ -8,22 +8,25 @@ export default function SingleRoutinePage() {
   const navigate = useNavigate();
   const { token } = useAuth();
 
-  const { data, loading, error } = useQuery(
-    `/routines/${routineId}`,
-    `routine-${routineId}`
-  );
+  // 1) Fetch the routine object (with its `sets` array)
+  const {
+    data: routine,    // <-- data is the routine
+    loading,
+    error,
+  } = useQuery(`/routines/${routineId}`, `routine-${routineId}`);
+
+  // 2) Delete mutation
   const {
     mutate: deleteRoutine,
     loading: deleting,
     error: deleteError,
   } = useMutation("DELETE", `/routines/${routineId}`, ["routines"]);
 
+  // 3) Loading / error
   if (loading) return <p>Loading routine…</p>;
-  if (error)   return <output role="alert">{error}</output>;
+  if (error || !routine) return <output role="alert">{error || "Not found"}</output>;
 
-  // `data` is the routine object with its `sets` array
-  const routine = data;
-
+  // 4) Render it
   return (
     <>
       <h1>{routine.name}</h1>
