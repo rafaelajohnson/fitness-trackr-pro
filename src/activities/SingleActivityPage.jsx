@@ -21,13 +21,16 @@ export default function SingleActivityPage() {
   if (loading) return <p>Loading activity…</p>;
   if (error) return <output role="alert">{error}</output>;
 
-  const activity = data.activity || data;
+  // The API returns { activity: { … } }
+  const activity = data.activity;
 
   return (
     <>
       <h1>{activity.name}</h1>
       <p>{activity.description}</p>
-      <p>Created by: {activity.creatorName}</p>
+      <p>
+        <strong>Created by:</strong> {activity.creatorName}
+      </p>
 
       {token && (
         <>
