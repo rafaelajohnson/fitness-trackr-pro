@@ -11,21 +11,21 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {/* Redirect root to /activities */}
+        {/* redirect / → /activities */}
         <Route index element={<Navigate to="/activities" replace />} />
 
-        {/* Activities list & detail */}
+        {/* list & detail */}
         <Route path="activities" element={<ActivitiesPage />} />
         <Route
           path="activities/:activityId"
           element={<SingleActivityPage />}
         />
 
-        {/* Auth */}
+        {/* auth */}
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
 
-        {/* 404 catch-all */}
+        {/* catch-all 404 */}
         <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>

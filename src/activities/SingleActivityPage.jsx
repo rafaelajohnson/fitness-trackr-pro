@@ -21,8 +21,7 @@ export default function SingleActivityPage() {
   if (loading) return <p>Loading activity…</p>;
   if (error) return <output role="alert">{error}</output>;
 
-  // The API returns { activity: { … } }
-  const activity = data.activity;
+  const activity = data.activity || data;
 
   return (
     <>

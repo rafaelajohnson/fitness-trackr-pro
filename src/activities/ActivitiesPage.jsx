@@ -8,7 +8,7 @@ export default function ActivitiesPage() {
     <>
       <h1>Activities</h1>
       <ActivityList />
-      {/* (Add-Activity form lives on routines workshop, not here) */}
+      {/* Add-activity form is in the Routines workshop */}
     </>
   );
 }
